@@ -1,64 +1,51 @@
 class Expense {
-constructor({desc, amount, category }) {
+constructor({desc, amt, cat}) {
    this.id = Date.now();
    this.desc = desc;
-   this.amount = parseFloat(amount);
-   this.category = category; 
+   this.amt = +amt;
+   this.cat = cat; 
   }
 }
+//OOP: ExpenseTracker class
 class ExpenseTracker {
 constructor() {
-    this.expense = JSON.parse(localStorage.getItem(`expense`)) || [];
-    this.render();
+    this.expense = JSON.parse(localStorage.getItem(`exp`)) || []; //LocalStorage
+    this.show();
 }
-  add({ desc, amount, category }) {
-    const expense = new Expense({ desc, amount, category });
-    this.expenses = [expense, ...this.expenses];  // Spread operator
-    this.save();
-    this.render();
-}
-remove(id) {
-    this.expenses = this.expenses.filter(exp => exp.id !== id);  // Filter
-    this.save();
-    this.render();
-}
+  add(data) { //Destructuring in caller
 
-getFiltered(category) {
-    return category ? this.expense.filter(exp => exp.category === category) :
-this.expense
-}
+    this.expenses = [new Expense(data), ...this.expenses];  // Spread + OOP
+    localStorage.setItem('exp', JSON.stringify(this.expenses));
+    this.show();
+  }
 
-  getTotal(expenses = this.expenses) {
-    return expenses.reduce((sum, { amount }) => sum + amount, 0);  // Destructure + Reduce
-}
-
-save() {
-        localStorage.setItem('expenses', JSON.stringify(this.expenses));
-}
-  render(filtered = this.expenses) {
-    const list = document.getElementById('expenseList');
-    const totalEl = document.getElementById('total');
-    list.innerHTML = filtered.map(exp => `
-      <li class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-        <span>${exp.desc} - KSh ${exp.amount} (${exp.category})</span>
-        <button onclick="tracker.remove(${exp.id})" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Delete</button>
-</li>
-    `).join('');  // Map
-    totalEl.textContent = `Total: KSh ${this.getTotal(filtered).toFixed(2)}`;
+del(id) {
+    this.expenses = this.expenses.filter(e => e.id !== id);  // Filter
+    localStorage.setItem('exp', JSON.stringify(this.expenses));
+    this.show();
+  }
+filter(cat) {
+    return cat ? this.expenses.filter(e => e.cat === cat) : this.expenses;
+  }
+  total(lst) {
+    return lst.reduce((sum, {amt}) => sum + amt, 0);  // Reduce + Destructuring
+  }
+  show(cat = document.getElementById('f').value) {
+    let lst = this.filter(cat);
+    document.getElementById('l').innerHTML = lst.map(e => 
+      `<li class="flex justify-between items-center p-3 bg-gray-50 rounded">
+        <span>${e.desc}: KSh ${e.amt} (${e.cat})</span>
+        <button onclick="tracker.del(${e.id})" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Delete</button>
+      </li>`
+    ).join('');  // Map
+    document.getElementById('t').textContent = `Total: KSh ${this.total(lst).toFixed(2)}`;
   }
 }
-
 const tracker = new ExpenseTracker();
 
-// Form submit
-document.getElementById('expenseForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const [desc, amount, category] = ['desc', 'amount', 'category'].map(id => document.getElementById(id).value);  // Destructure + map
-  if (desc && amount && category) tracker.add({ desc, amount, category });
-  e.target.reset();
-});
-// Filter
-document.getElementById('filterCat').addEventListener('change', e => {
-  const filtered = tracker.getFiltered(e.target.value);
-  tracker.render(filtered);
-});
+// Global add() function (matches onclick)
+function add() {
+  const [desc, amt, cat] = ['d', 'a', 'c'].map(id => document.getElementById(id).value);
+  if (desc && amt) tracker.add({desc, amt, cat});
+  document.getElementById('d').value = document.getElementById('a').value = document.getElementById('c').value = '';
+}
