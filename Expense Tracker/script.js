@@ -9,7 +9,7 @@ constructor({desc, amt, cat}) {
 //OOP: ExpenseTracker class
 class ExpenseTracker {
 constructor() {
-    this.expense = JSON.parse(localStorage.getItem(`exp`)) || []; //LocalStorage
+    this.expenses = JSON.parse(localStorage.getItem('exp')) || [];
     this.show();
 }
   add(data) { //Destructuring in caller
