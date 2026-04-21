@@ -25,10 +25,9 @@ Setup & Test
 bash
 npm install
 npm test  
-```
 
-Screenshots 
-![Expense Tracker](https://via.placeholder.com/800x400/blue/white?text=Expense+Tracker+Demo)
+Screenshots:
+Expense Tracker(https://via.placeholder.com/800x400/blue/white?text=Expense+Tracker+Demo)
 
 Rubric Compliance 
 - 3 files: index.html, script.js, styles (Tailwind CDN)
@@ -39,6 +38,5 @@ Rubric Compliance
 - GitHub Pages deployed
 - Responsive Tailwind UI
 
-**Score: 10/10** 🎯
 
 Built by Edward Mulwa | Zindua School 2026
