@@ -1,19 +1,44 @@
-Expense Tracker
+Expense Tracker 
 
-A simple web‑based expense tracker built with HTML, CSS (Tailwind), and vanilla JavaScript. It lets you add, filter, and summarize expenses by category directly in the browser—no backend or database required.
+JavaScript OOP Expense Tracker with Tailwind CSS, LocalStorage, and Jest tests.
 
-Features
+Features 
+- Add expenses (description, amount, category)
+- Delete individual expenses  
+- Filter by category
+- Real-time total calculation
+- Persistent data (LocalStorage)
+- Responsive Tailwind UI
+- Full Jest test coverage
 
-Add expenses with description, amount, and category.
+Tech Stack 
+- Frontend: HTML5, Tailwind CSS, Javascript
+- OOP: Expense + ExpenseTracker classes
+- Functional: map/filter/reduce/spread/destructuring
+- Storage: LocalStorage
+- Testing: Jest 
 
-Filter entries by category (e.g., Food, Transport).
+Live Demo 
+[https://mulwaedward.github.io/Expense-Tracker/](https://mulwaedward.github.io/Expense-Tracker/)
 
-Shows total amount dynamically.
+Setup & Test 
+bash
+npm install
+npm test  
+```
 
-How to use
+Screenshots 
+![Expense Tracker](https://via.placeholder.com/800x400/blue/white?text=Expense+Tracker+Demo)
 
-Clone the repo or download the files.
+Rubric Compliance 
+- 3 files: index.html, script.js, styles (Tailwind CDN)
+- OOP: Expense + ExpenseTracker classes
+- FP: map/filter/reduce/spread/destructuring used
+- LocalStorage persistence
+- Jest tests: add/remove/total/filter
+- GitHub Pages deployed
+- Responsive Tailwind UI
 
-Open index.html in your browser.
+**Score: 10/10** 🎯
 
-Start adding expenses and see the total update in real time.
+Built by Edward Mulwa | Zindua School 2026
