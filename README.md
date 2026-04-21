@@ -26,8 +26,7 @@ bash
 npm install
 npm test  
 
-Screenshots:
-Expense Tracker(https://via.placeholder.com/800x400/blue/white?text=Expense+Tracker+Demo)
+Screenshot.
 
 Rubric Compliance 
 - 3 files: index.html, script.js, styles (Tailwind CDN)
